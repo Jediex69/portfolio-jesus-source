@@ -42,6 +42,10 @@ import wordpressLogo from "./assets/logos/wordpress.svg";
 export default function PortfolioLanding() {
   const [showCv, setShowCv] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [contactStatus, setContactStatus] = useState("");
+  const [contactStatusType, setContactStatusType] = useState("info");
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+  const contactFormEndpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || "https://formspree.io/f/mdajaley";
 
   useEffect(() => {
     const animatedElements = document.querySelectorAll(".reveal-on-scroll");
@@ -246,6 +250,59 @@ export default function PortfolioLanding() {
       date: "Ago 2021",
     },
   ];
+
+  const handleContactSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!contactFormEndpoint) {
+      setContactStatusType("error");
+      setContactStatus("El formulario necesita configurar VITE_CONTACT_FORM_ENDPOINT para enviar mensajes.");
+      return;
+    }
+
+    setIsSubmittingContact(true);
+    setContactStatusType("info");
+    setContactStatus("Enviando mensaje...");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name")?.toString().trim();
+    const email = formData.get("email")?.toString().trim();
+    const message = formData.get("message")?.toString().trim();
+    const subject = `Contacto portfolio - ${name || "Nuevo mensaje"}`;
+
+    formData.set("name", name);
+    formData.set("email", email);
+    formData.set("message", message);
+    formData.set("_replyto", email);
+    formData.set("_subject", subject);
+
+    try {
+      const response = await fetch(contactFormEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        const errorMessage =
+          errorData?.errors?.[0]?.message || "No se pudo enviar el mensaje.";
+        throw new Error(errorMessage);
+      }
+
+      form.reset();
+      setContactStatusType("success");
+      setContactStatus("Mensaje enviado correctamente. Te responderé lo antes posible.");
+    } catch (error) {
+      setContactStatusType("error");
+      setContactStatus(`${error.message} Prueba de nuevo o escríbeme a jediex69@gmail.com.`);
+    } finally {
+      setIsSubmittingContact(false);
+    }
+  };
 
   return (
     <div className="portfolio-shell">
@@ -634,22 +691,27 @@ export default function PortfolioLanding() {
               </div>
             </div>
             <div className="col-lg-6 reveal-on-scroll reveal-scale reveal-delay-1">
-              <form className="card glass-card rounded-4 p-4">
+              <form className="card glass-card rounded-4 p-4" onSubmit={handleContactSubmit}>
                 <div className="mb-3">
                   <label className="form-label fw-semibold" htmlFor="name">Nombre</label>
-                  <input id="name" type="text" className="form-control form-control-lg" placeholder="Tu nombre" />
+                  <input id="name" name="name" type="text" className="form-control form-control-lg" placeholder="Tu nombre" required />
                 </div>
                 <div className="mb-3">
                   <label className="form-label fw-semibold" htmlFor="email">Email</label>
-                  <input id="email" type="email" className="form-control form-control-lg" placeholder="tu@email.com" />
+                  <input id="email" name="email" type="email" className="form-control form-control-lg" placeholder="tu@email.com" required />
                 </div>
                 <div className="mb-3">
                   <label className="form-label fw-semibold" htmlFor="message">Mensaje</label>
-                  <textarea id="message" className="form-control" rows="4" placeholder="Cuéntame en qué puedo ayudarte"></textarea>
+                  <textarea id="message" name="message" className="form-control" rows="4" placeholder="Cuéntame en qué puedo ayudarte" required></textarea>
                 </div>
-                <button type="submit" className="btn btn-accent btn-lg rounded-pill px-4">
-                  Enviar mensaje
+                <button type="submit" className="btn btn-accent btn-lg rounded-pill px-4" disabled={isSubmittingContact}>
+                  {isSubmittingContact ? "Enviando..." : "Enviar mensaje"}
                 </button>
+                {contactStatus && (
+                  <p className={`form-status form-status-${contactStatusType} mt-3 mb-0`} aria-live="polite">
+                    {contactStatus}
+                  </p>
+                )}
               </form>
             </div>
           </div>

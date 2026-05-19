@@ -473,6 +473,28 @@ html {
   color: var(--text-main);
 }
 
+.form-status {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  color: var(--text-muted-custom);
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.form-status-success {
+  color: #cffafe;
+  border-color: rgba(34, 211, 238, 0.36);
+  background: rgba(20, 184, 166, 0.12);
+}
+
+.form-status-error {
+  color: #fee2e2;
+  border-color: rgba(252, 165, 165, 0.42);
+  background: rgba(239, 68, 68, 0.12);
+}
+
 .contact-link {
   color: var(--text-muted-custom);
   text-decoration: none;
