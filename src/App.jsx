@@ -4,6 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import cvJesus from "./assets/CV_Jesus.pdf";
 import profilePhoto from "./assets/foto.png";
+import jesusDiazLogo from "./assets/logo-jesus-diaz.svg";
 import theBridgeLogo from "./assets/the_bridge_logo.svg";
 import atentoLogo from "./assets/logos/atento.png";
 import bootstrapLogo from "./assets/logos/bootstrap.svg";
@@ -251,7 +252,7 @@ export default function PortfolioLanding() {
       <nav className="navbar navbar-expand-lg custom-navbar sticky-top">
         <div className="container py-2">
           <a className="navbar-brand fw-bold" href="#inicio" onClick={() => setIsNavOpen(false)}>
-            Jesús Díaz<span className="gradient-text">.</span>
+            <img className="brand-logo" src={jesusDiazLogo} alt="Jesús Díaz" />
           </a>
           <button
             className={`navbar-toggler border-0 ${isNavOpen ? "" : "collapsed"}`}

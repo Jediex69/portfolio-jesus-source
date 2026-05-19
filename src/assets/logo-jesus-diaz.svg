@@ -1,0 +1,21 @@
+<svg width="208" height="52" viewBox="0 0 208 52" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Jediex</title>
+  <desc id="desc">Professional logo for Jediex portfolio</desc>
+  <defs>
+    <linearGradient id="markGradient" x1="7" y1="8" x2="45" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="wordGradient" x1="65" y1="16" x2="165" y2="38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F7FB"/>
+      <stop offset="1" stop-color="#A9B8CC"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="50" height="50" rx="14" fill="#0D1B2F" stroke="url(#markGradient)" stroke-width="2"/>
+  <path d="M17 15H29C35.1 15 39 18.9 39 25C39 31.1 35.1 35 29 35H24" stroke="url(#markGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M25 15V32C25 36.1 22.4 38.5 18.5 38.5C15.8 38.5 13.7 37.3 12.5 35.2" stroke="#F4F7FB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 22L40 14" stroke="#22D3EE" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="66" y="38" fill="url(#wordGradient)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="0">Jediex</text>
+  <path d="M67 11.2H154" stroke="url(#markGradient)" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M67 47H122" stroke="url(#markGradient)" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/>
+</svg>

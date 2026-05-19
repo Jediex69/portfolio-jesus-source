@@ -71,6 +71,20 @@ html {
   color: var(--text-main) !important;
 }
 
+.custom-navbar .navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  max-width: min(52vw, 208px);
+  margin-right: 1rem;
+  padding-block: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: clamp(150px, 18vw, 208px);
+  height: auto;
+}
+
 .custom-navbar .nav-link {
   opacity: 0.78;
   transition: opacity 0.2s ease, color 0.2s ease;
@@ -97,6 +111,14 @@ html {
 }
 
 @media (max-width: 991.98px) {
+  .custom-navbar .navbar-brand {
+    max-width: calc(100vw - 96px);
+  }
+
+  .brand-logo {
+    width: clamp(142px, 44vw, 188px);
+  }
+
   .custom-navbar .navbar-collapse {
     margin-top: 0.75rem;
     padding: 0.75rem;
